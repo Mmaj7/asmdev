@@ -4,17 +4,16 @@ org 100h
 ;init graphics
 push 0B800h
 pop es
-xor di, di
 call HideCursor
 
 ;clear screen
+xor di, di
 mov cx, ScreenX * ScreenY
 clear:
  mov [es:di], word Empty
  inc di
  inc di
 loop clear
-xor di, di
 
 mainLoop:
  call CalcDI
