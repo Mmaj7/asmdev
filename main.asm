@@ -8,7 +8,7 @@ xor di, di
 call HideCursor
 
 ;clear screen
-mov cx, 2000
+mov cx, ScreenX * ScreenY
 clear:
  mov [es:di], word Empty
  inc di
