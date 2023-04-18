@@ -1,0 +1,8 @@
+Compile:
+fasm %f
+
+Debug:
+dosbox -c "mount E /home/linuxeed/asm_toolchain" -c "E:" -c "td\td %e"
+
+Run:
+dosbox %e.com
