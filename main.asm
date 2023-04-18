@@ -7,37 +7,61 @@ pop es
 xor di, di
 call HideCursor
 
+;clear screen
+mov cx, 2000
+clear:
+ mov [es:di], word Empty
+ inc di
+ inc di
+loop clear
+xor di, di
+
 mainLoop:
  call CalcDI
  mov [es:di], word Smiley
 
  call GetKey
+ call KeyHandle
 
+ ;escape
+ cmp ah, 1h
+jnz mainLoop
+
+;exit
+int 20h
+
+; === Functions ===
+GetKey:
+ mov ah, 10h
+ int 16h
+ret
+
+KeyHandle:
  ;left
  cmp ah, 4Bh
  jnz @f
-  mov [es:di], word Empty
+  mov [es:di], word Blue
   dec [y]
  @@:
 
  ;right
  cmp ah, 4Dh
  jnz @f
-  mov [es:di], word Empty
+  mov [es:di], word Blue
   inc [y]
  @@:
 
  ;up
  cmp ah, 48h
  jnz @f
-  mov [es:di], word Empty
+  mov [es:di], word Blue
   dec [x]
  @@:
 
  ;down
  cmp ah, 50h
  jnz @f
-  mov [es:di], word Empty
+  mov [es:di], word Blue
   inc [x]
  @@:
 
@@ -59,18 +83,6 @@ mainLoop:
  jng @f
   mov [y], ScreenY - 1
  @@:
-
-;escape
-cmp ah, 1h
-jnz mainLoop
-
-;exit
-int 20h
-
-; === Functions ===
-GetKey:
- mov ah, 10h
- int 16h
 ret
 
 HideCursor:
@@ -88,9 +100,11 @@ CalcDI:
 ret
 
 ; === Data ===
-x dw 0
-y dw 0
-Smiley = 1F01h
-Empty = 1F20h
+x dw 10
+y dw 10
+
+Smiley  = 1F01h
+Empty   = 0020h
+Blue    = 1F20h
 ScreenX = 25
 ScreenY = 80
