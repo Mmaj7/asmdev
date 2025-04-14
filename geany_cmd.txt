@@ -2,7 +2,7 @@ Compile:
 fasm %f
 
 Debug:
-dosbox -c "mount E /home/linuxeed/asm_toolchain" -c "E:" -c "td\td %e" -c "exit"
+dosbox -c "mount E /home/user/asm_toolchain" -c "E:" -c "td\td %e" -c "exit"
 
 Run:
 dosbox -exit "%e.com"
