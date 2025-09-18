@@ -1,0 +1,1 @@
+Примеры NASM и FASM "Hello world" для Linux.
