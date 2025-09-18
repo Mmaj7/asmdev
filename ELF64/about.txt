@@ -1,1 +1,9 @@
 Примеры NASM и FASM "Hello world" для Linux.
+
+FASM:
+fasm fasm_main.asm
+ld fasm_main.o -o fasm_main
+
+NASM:
+nasm -f ELF64 nasm_main.asm
+ld nasm_main.o -o nasm_main
